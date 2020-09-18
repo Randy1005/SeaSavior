@@ -5,12 +5,13 @@ class Scene1 extends Phaser.Scene {
 	
 	preload() {
 		this.load.image('sea', 'assets/sprites/sea.png');
-		this.load.image('fish', 'assets/sprites/fish.png');
-		this.load.image('plane', 'assets/sprites/plane.png');
+		this.load.image('plane', 'assets/sprites/plane_placeholder.png');
+		this.load.image('diver', 'assets/sprites/scuba_placeholder.png');
+		this.load.image('sub', 'assets/sprites/sub_placeholder.png');
 	}
 	
 	create() {
-		this.add.text(20, 20, "Loading...");
-		this.scene.start("playGame");
+		this.add.text(20, 20, 'Loading...');
+		this.scene.start('playGame');
 	}
 }
