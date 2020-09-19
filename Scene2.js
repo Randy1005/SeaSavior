@@ -29,25 +29,38 @@ class Scene2 extends Phaser.Scene {
             texture: 'diver'
         }, 100, [40, 60]);
 
-
-        this.gb = new Garbage({
-            scene: this,
-            x: game.config.width / 2,
-            y: 2,
-            texture: 'trash'
-        }, [25, 30])
+        // a timer to create garbage
+        this.time.addEvent({
+            delay: 2000,
+            callback: this.creatingGarbage,
+            callbackScope: this,
+            loop: true
+        });
 
     }
 
+    creatingGarbage() {
+        for (var i = 0; i < this.planes.getChildren().length; i++) {
+            var oneplane = this.planes.getChildren()[i];
+            oneplane.createGarbage(this);
+        }
+        this.droppingGarbage();
+    }
+
+    droppingGarbage() {
+        for (var i = 0; i < this.garbageList.getChildren().length; i++) {
+            var g = this.garbageList.getChildren()[i];
+            g.setGravityOn(this);
+        }
+    }
 
     update() {
         for (var i = 0; i < this.planes.getChildren().length; i++) {
-            var temp = this.planes.getChildren()[i];
-            temp.update();
+            var oneplane = this.planes.getChildren()[i];
+            oneplane.update();
         }
 
         this.diver.update();
-        this.gb.Update();
 
     }
 }

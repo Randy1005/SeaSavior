@@ -4,7 +4,6 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         this.objectID = 'DIVER';
 
-
         // set sprite size
         this.displayWidth = size[0];
         this.displayHeight = size[1];
@@ -49,11 +48,5 @@ class Diver extends Phaser.GameObjects.Sprite {
 
     }
 
-    spriteCollision(sprite1, sprite2) {
-        if (sprite2.objectID == 'GARBAGE' || sprite1.objectID == 'GARBAGE') {
-            console.log("collide with trash");
-        }
-
-    }
 
 }
