@@ -37,6 +37,10 @@ class Scene2 extends Phaser.Scene {
             loop: true
         });
 
+
+        // add overlap listener to diver and grabages
+        this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
+
     }
 
     creatingGarbage() {
@@ -52,6 +56,20 @@ class Scene2 extends Phaser.Scene {
             var g = this.garbageList.getChildren()[i];
             g.setGravityOn(this);
         }
+    }
+
+
+    // for diver to update garbage collection
+    collectGarbage(diver, garbage) {
+        garbage.body.enable = false;
+        if (garbage.active) {
+            garbage.destroy();
+        } else {
+            return;
+        }
+
+        diver.addGarbage();
+
     }
 
     update() {

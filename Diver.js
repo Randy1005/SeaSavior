@@ -20,15 +20,10 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         // garbage collection counter
         this.maxGarbages = 6;
-        this.garbageBin = [];
+        this.garbageCnt = 0;
 
         config.scene.add.existing(this);
     }
-
-    update() {
-        this.moveDiverManager();
-    }
-
 
     moveDiverManager() {
         this.body.setVelocity(0);
@@ -47,6 +42,22 @@ class Diver extends Phaser.GameObjects.Sprite {
         }
 
     }
+
+    addGarbage() {
+        if (this.garbageCnt < this.maxGarbages) {
+            this.garbageCnt++;
+            console.log("garbage count: " + this.garbageCnt);
+        } else
+            return;
+    }
+
+
+    update() {
+        this.moveDiverManager();
+    }
+
+
+
 
 
 }
