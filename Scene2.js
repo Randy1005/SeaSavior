@@ -62,13 +62,14 @@ class Scene2 extends Phaser.Scene {
     // for diver to update garbage collection
     collectGarbage(diver, garbage) {
         garbage.body.enable = false;
-        if (garbage.active) {
+        if (garbage.active && diver.garbageCnt < 6) {
             garbage.destroy();
+            diver.addGarbage();
         } else {
             return;
         }
 
-        diver.addGarbage();
+
 
     }
 
