@@ -5,15 +5,31 @@ class Garbage extends Phaser.GameObjects.Sprite {
         this.displayWidth = size[0];
         this.displayHeight = size[1];
         config.scene.add.existing(this);
+		// status if it is been throwed back
+		this.isShootBack = false;
     }
 
     setGravityOn(scene) {
         scene.physics.world.enableBody(this);
         this.body.collideWorldBounds = true;
         this.body.gravity.y = 100;
+		//this.body.velocity.y = 100;
     }
+	
+	setGravityUp(scene) {
+		scene.physics.world.enableBody(this);
+        this.body.collideWorldBounds = true;
+		//this.body.gravity.y = 100;
+        this.body.velocity.y = -250;
+		this.isShootBack = true;
+	}
 
-    Update() {
-        console.log(this.body.gravity.y);
+    Update(scene) {
+        if (this.isShootBack)
+			this.setGravityUp(scene);
+		else
+			this.setGravityOn(scene);
+		if (this.y < 30)
+			this.isShootBack = false;
     }
 }
