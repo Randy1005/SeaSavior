@@ -11,7 +11,7 @@ class Plane extends Phaser.GameObjects.Sprite {
         this.speed = speed;
         this.goLeft = goLeft;
 
-        if (goLeft) {
+        if (!goLeft) {
             this.flipX = true;
         }
 
@@ -19,7 +19,6 @@ class Plane extends Phaser.GameObjects.Sprite {
 
     moveHorizontal() {
         if (this.goLeft) {
-
             this.x -= this.speed;
             if (this.x < -50)
                 this.x = config.width + 50;
@@ -28,17 +27,19 @@ class Plane extends Phaser.GameObjects.Sprite {
             if (this.x > config.width + 50)
                 this.x = -50;
         }
+
     }
 
     createGarbage(scene) {
-        var garbage = new Garbage({
-            scene: scene,
-            x: this.x,
-            y: this.y,
-            texture: 'trash'
-        }, [25, 30]);
-
-        scene.garbageList.add(garbage);
+        if (this.x >= 0 && this.x <= config.width) {
+            var garbage = new Garbage({
+                scene: scene,
+                x: this.x,
+                y: this.y + 20,
+                texture: 'trash'
+            }, [25, 30]);
+            scene.garbageList.add(garbage);
+        }
     }
 
 

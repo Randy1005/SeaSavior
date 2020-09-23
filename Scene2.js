@@ -5,7 +5,7 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
-        var seaSurfaceDepth = 270;
+        var seaSurfaceDepth = 290;
 
         // background
         this.background = this.add.image(0, 0, 'sea');
@@ -38,9 +38,10 @@ class Scene2 extends Phaser.Scene {
             texture: 'trashboat'
         }, 0.6, [60, 60]);
 
+
         // a timer to create garbage
         this.time.addEvent({
-            delay: 2000,
+            delay: 5000,
             callback: this.creatingGarbage,
             callbackScope: this,
             loop: true
@@ -57,16 +58,14 @@ class Scene2 extends Phaser.Scene {
 
 
 
-        // add overlap listener to diver and garbages
-        this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
-
-        // add collision listener to diver and garbages
-        this.physics.add.overlap(this.planes, this.garbageList, this.shootingGarbage, null, this);
-
         // add overlap listener for garbages and trashboat
         this.physics.add.overlap(this.trashBoat, this.garbageList, this.trashBoatCollectGarbage, null, this);
 
 
+        // add overlap listener to diver and grabages
+        this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
+        // add collision listener to plane and grabages
+        this.physics.add.overlap(this.planes, this.garbageList, this.shootingPlane, null, this);
     }
 
     creatingGarbage() {
@@ -89,6 +88,18 @@ class Scene2 extends Phaser.Scene {
             plane.destroy();
         }
     }
+    respwanPlane(planeY, planeSpeed, planeDir) {
+        console.log("creating a plane");
+        var plane = new Plane(this, -50, planeY, planeSpeed, planeDir);
+    }
+
+    shootingPlane(plane, garbage) {
+        if (garbage.isShootBack) {
+            garbage.destroy();
+            this.time.delayedCall(5000, this.respwanPlane, [plane.y, plane.speed, plane.goLeft], this);
+            plane.destroy();
+        }
+    }
 
 
     // for diver to update garbage collection
@@ -101,6 +112,7 @@ class Scene2 extends Phaser.Scene {
             return;
         }
     }
+
 
     // for trash boat to collect garbage (no limits)
     trashBoatCollectGarbage(trashBoat, garbage) {
@@ -116,6 +128,7 @@ class Scene2 extends Phaser.Scene {
         this.trashBoatTimer.paused = true;
     }
 
+
     update() {
         for (var i = 0; i < this.planes.getChildren().length; i++) {
             var oneplane = this.planes.getChildren()[i];
@@ -125,5 +138,6 @@ class Scene2 extends Phaser.Scene {
         this.droppingGarbage();
 
         this.trashBoat.update();
+        this.droppingGarbage();
     }
 }

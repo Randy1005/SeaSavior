@@ -30,13 +30,14 @@ class Diver extends Phaser.GameObjects.Sprite {
         this.body.setVelocity(0);
 
         if (this.cursorKeys.left.isDown) {
-
             this.body.setVelocityX(-this.playerSpeed);
+            this.flipX = false;
         } else if (this.cursorKeys.right.isDown) {
             this.body.setVelocityX(this.playerSpeed);
+            this.flipX = true;
         }
 
-        if (this.cursorKeys.up.isDown && this.y > 305) {
+        if (this.cursorKeys.up.isDown && this.y > 308) {
             this.body.setVelocityY(-this.playerSpeed);
         } else if (this.cursorKeys.down.isDown) {
             this.body.setVelocityY(this.playerSpeed);
@@ -52,6 +53,7 @@ class Diver extends Phaser.GameObjects.Sprite {
     addGarbage() {
         if (this.garbageCnt < this.maxGarbages) {
             this.garbageCnt++;
+            console.log("garbage count: " + this.garbageCnt);
         } else
             return;
     }
@@ -69,6 +71,7 @@ class Diver extends Phaser.GameObjects.Sprite {
             garbage.isShootBack = true;;
             scene.garbageList.add(garbage);
         }
+        console.log("garbage count: " + this.garbageCnt);
     }
 
 
