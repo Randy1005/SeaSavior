@@ -1,6 +1,6 @@
 var config = {
-  width: 728,
-  height: 410,
+  width: 960,
+  height: 540,
   backgroundColor: 0x000000,
   scene: [Scene1, Scene2],
   pixelArt: true,
@@ -12,9 +12,6 @@ var config = {
   }
 }
 
-var gameSettings = {
-	playerSpeed: 100
-}
 
 
 var game = new Phaser.Game(config);
