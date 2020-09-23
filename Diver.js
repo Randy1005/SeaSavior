@@ -21,7 +21,7 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         // garbage collection counter
         this.maxGarbages = 6;
-        this.garbageCnt = 6;
+        this.garbageCnt = 0;
 
         config.scene.add.existing(this);
     }
