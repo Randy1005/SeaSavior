@@ -26,7 +26,7 @@ class Scene2 extends Phaser.Scene {
         this.diver = new Diver({
             scene: this,
             x: game.config.width / 2,
-            y: 300,
+            y: 310,
             texture: 'diver'
         }, 100, [40, 60]);
 
