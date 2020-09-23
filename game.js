@@ -9,7 +9,8 @@ var config = {
         arcade: {
             debug: false
         }
-    }
+    },
+	health: 100
 }
 
 

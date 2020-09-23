@@ -28,7 +28,7 @@ class Scene2 extends Phaser.Scene {
             x: game.config.width / 2,
             y: 310,
             texture: 'diver'
-        }, 100, [40, 60]);
+        }, 200, [40, 60]);
 
         // trashboat
         this.trashBoat = new TrashBoat({
@@ -138,6 +138,9 @@ class Scene2 extends Phaser.Scene {
         this.droppingGarbage();
 
         this.trashBoat.update();
-        this.droppingGarbage();
+		if (config.health <= 0) {
+			console.log("You Died");
+			functioNotExist();
+		}
     }
 }
