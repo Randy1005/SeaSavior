@@ -1,6 +1,5 @@
 class Scene2 extends Phaser.Scene {
 
-
     constructor() {
         super("playGame");
     }
@@ -37,9 +36,11 @@ class Scene2 extends Phaser.Scene {
             loop: true
         });
 
-
         // add overlap listener to diver and grabages
         this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
+        // add collision listener to diver and grabages
+        this.physics.add.overlap(this.planes, this.garbageList, this.shootingGarbage, null, this);
+
 
     }
 
@@ -48,27 +49,32 @@ class Scene2 extends Phaser.Scene {
             var oneplane = this.planes.getChildren()[i];
             oneplane.createGarbage(this);
         }
-        this.droppingGarbage();
     }
 
     droppingGarbage() {
         for (var i = 0; i < this.garbageList.getChildren().length; i++) {
             var g = this.garbageList.getChildren()[i];
-            g.setGravityOn(this);
+            g.Update(this);
+        }
+    }
+
+    shootingGarbage(plane, garbage) {
+        if (garbage.isShootBack) {
+            garbage.destroy();
+            plane.destroy();
         }
     }
 
 
     // for diver to update garbage collection
     collectGarbage(diver, garbage) {
-        garbage.body.enable = false;
+        //garbage.body.enable = false;
         if (garbage.active && diver.garbageCnt < 6) {
             garbage.destroy();
             diver.addGarbage();
         } else {
             return;
         }
-
     }
 
     update() {
@@ -76,8 +82,7 @@ class Scene2 extends Phaser.Scene {
             var oneplane = this.planes.getChildren()[i];
             oneplane.update();
         }
-
-        this.diver.update();
-
+        this.diver.update(this);
+        this.droppingGarbage();
     }
 }
