@@ -17,7 +17,7 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         // input
         this.cursorKeys = config.scene.input.keyboard.createCursorKeys();
-		this.spacebar = config.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.spacebar = config.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // garbage collection counter
         this.maxGarbages = 6;
@@ -42,41 +42,39 @@ class Diver extends Phaser.GameObjects.Sprite {
             this.body.setVelocityY(this.playerSpeed);
         }
     }
-	
-	diverActionManager(scene) {
-		if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-			this.shootGarbage(scene);
-		}
-	}
+
+    diverActionManager(scene) {
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+            this.shootGarbage(scene);
+        }
+    }
 
     addGarbage() {
         if (this.garbageCnt < this.maxGarbages) {
             this.garbageCnt++;
-            console.log("garbage count: " + this.garbageCnt);
         } else
             return;
     }
-	
-	shootGarbage(scene) {
-		if (this.garbageCnt > 0) {
-			this.garbageCnt--;
-			// create garbage
-			var garbage = new Garbage({
-				scene: scene,
-				x: this.x,
-				y: this.y - 60,
-				texture: 'trash'
-				}, [25, 30]);
-			garbage.isShootBack = true;;
-			scene.garbageList.add(garbage);
-		}
-		console.log("garbage count: " + this.garbageCnt);
-	}
+
+    shootGarbage(scene) {
+        if (this.garbageCnt > 0) {
+            this.garbageCnt--;
+            // create garbage
+            var garbage = new Garbage({
+                scene: scene,
+                x: this.x,
+                y: this.y - 60,
+                texture: 'trash'
+            }, [25, 30]);
+            garbage.isShootBack = true;;
+            scene.garbageList.add(garbage);
+        }
+    }
 
 
     update(scene) {
         this.moveDiverManager();
-		this.diverActionManager(scene);
+        this.diverActionManager(scene);
     }
 
 

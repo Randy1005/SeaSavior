@@ -5,6 +5,8 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
+        var seaSurfaceDepth = 270;
+
         // background
         this.background = this.add.image(0, 0, 'sea');
         this.background.setOrigin(0, 0);
@@ -28,6 +30,14 @@ class Scene2 extends Phaser.Scene {
             texture: 'diver'
         }, 100, [40, 60]);
 
+        // trashboat
+        this.trashBoat = new TrashBoat({
+            scene: this,
+            x: game.config.width + 60,
+            y: seaSurfaceDepth,
+            texture: 'trashboat'
+        }, 0.6, [60, 60]);
+
         // a timer to create garbage
         this.time.addEvent({
             delay: 2000,
@@ -36,10 +46,25 @@ class Scene2 extends Phaser.Scene {
             loop: true
         });
 
-        // add overlap listener to diver and grabages
+        // a timer to activate trash boat
+        this.trashBoatTimer = this.time.addEvent({
+            delay: 1000 * 2,
+            callback: this.activateTrashBoat,
+            callbackScope: this,
+            loop: true,
+            paused: false
+        });
+
+
+
+        // add overlap listener to diver and garbages
         this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
-        // add collision listener to diver and grabages
+
+        // add collision listener to diver and garbages
         this.physics.add.overlap(this.planes, this.garbageList, this.shootingGarbage, null, this);
+
+        // add overlap listener for garbages and trashboat
+        this.physics.add.overlap(this.trashBoat, this.garbageList, this.trashBoatCollectGarbage, null, this);
 
 
     }
@@ -77,6 +102,20 @@ class Scene2 extends Phaser.Scene {
         }
     }
 
+    // for trash boat to collect garbage (no limits)
+    trashBoatCollectGarbage(trashBoat, garbage) {
+        if (garbage.active) {
+            garbage.destroy();
+        } else
+            return;
+    }
+
+    // activate trash boat after a specific time interval
+    activateTrashBoat() {
+        this.trashBoat.setActive(true);
+        this.trashBoatTimer.paused = true;
+    }
+
     update() {
         for (var i = 0; i < this.planes.getChildren().length; i++) {
             var oneplane = this.planes.getChildren()[i];
@@ -84,5 +123,7 @@ class Scene2 extends Phaser.Scene {
         }
         this.diver.update(this);
         this.droppingGarbage();
+
+        this.trashBoat.update();
     }
 }
