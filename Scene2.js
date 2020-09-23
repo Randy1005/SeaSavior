@@ -49,7 +49,7 @@ class Scene2 extends Phaser.Scene {
 
         // a timer to activate trash boat
         this.trashBoatTimer = this.time.addEvent({
-            delay: 1000 * 2,
+            delay: 1000 * 20,
             callback: this.activateTrashBoat,
             callbackScope: this,
             loop: true,
