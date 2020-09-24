@@ -8,7 +8,7 @@ class Scene2 extends Phaser.Scene {
         var seaSurfaceDepth = 290;
 
         // background
-        this.background = this.add.image(0, 0, 'sea');
+        this.background = this.add.image(0, 0, 'sea0');
         this.background.setOrigin(0, 0);
 
         // planes
@@ -33,10 +33,10 @@ class Scene2 extends Phaser.Scene {
         // trashboat
         this.trashBoat = new TrashBoat({
             scene: this,
-            x: game.config.width + 60,
+            x: game.config.width + 40,
             y: seaSurfaceDepth,
             texture: 'trashboat'
-        }, 0.6, [60, 60]);
+        }, 0.6, [80, 80]);
 
 
         // a timer to create garbage
@@ -141,6 +141,18 @@ class Scene2 extends Phaser.Scene {
         if (config.health <= 0) {
             console.log("You Died");
             functioNotExist();
+        }
+        if (config.health == 80) {
+            this.background.setTexture("sea1");
+            config.health = 81;
+        }
+        if (config.health == 51) {
+            this.background.setTexture("sea2");
+            config.health = 50;
+        }
+        if (config.health == 20) {
+            this.background.setTexture("sea3");
+            config.health = 19;
         }
     }
 }
