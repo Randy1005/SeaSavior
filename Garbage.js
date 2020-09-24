@@ -7,7 +7,7 @@ class Garbage extends Phaser.GameObjects.Sprite {
         config.scene.add.existing(this);
         // status if it is been throwed back
         this.isShootBack = false;
-		this.startDecaying = 0;
+		this.startDecaying = true;
     }
 
     setGravityOn(scene) {
@@ -42,9 +42,9 @@ class Garbage extends Phaser.GameObjects.Sprite {
             this.body.gravity.y = 0;
             this.body.velocity.y = 20;
         }
-		if (this.y > 524 && this.startDecaying == 0) {
+		if (this.y > 520 && this.startDecaying) {
 			scene.time.delayedCall(2000, this.decay, [], this);
-			this.startDecaying++;
+			this.startDecaying = false;
 		}
     }
 }
