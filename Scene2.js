@@ -138,9 +138,9 @@ class Scene2 extends Phaser.Scene {
         this.droppingGarbage();
 
         this.trashBoat.update();
-		if (config.health <= 0) {
-			console.log("You Died");
-			functioNotExist();
-		}
+        if (config.health <= 0) {
+            console.log("You Died");
+            functioNotExist();
+        }
     }
 }
