@@ -20,7 +20,7 @@ class Diver extends Phaser.GameObjects.Sprite {
         this.spacebar = config.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // garbage collection counter
-        this.maxGarbages = 6;
+        this.maxGarbages = 10;
         this.garbageCnt = 0;
 
         config.scene.add.existing(this);
@@ -39,7 +39,7 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         if (this.cursorKeys.up.isDown && this.y > 308) {
             this.body.setVelocityY(-this.playerSpeed);
-        } else if (this.cursorKeys.down.isDown) {
+        } else if (this.cursorKeys.down.isDown && this.y < 505) {
             this.body.setVelocityY(this.playerSpeed);
         }
     }

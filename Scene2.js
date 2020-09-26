@@ -66,6 +66,15 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.overlap(this.diver, this.garbageList, this.collectGarbage, null, this);
         // add collision listener to plane and grabages
         this.physics.add.overlap(this.planes, this.garbageList, this.shootingPlane, null, this);
+		
+		// HUD
+		this.garbageHUD = this.add.group();
+		for (var i = 0; i < this.diver.maxGarbages; i++) {
+			var g = this.add.image(i * 60 + 180, 570, 'trash');
+			g.setAlpha(0.5);
+			this.garbageHUD.add(g);
+		}
+			
     }
 
     creatingGarbage() {
@@ -105,9 +114,10 @@ class Scene2 extends Phaser.Scene {
     // for diver to update garbage collection
     collectGarbage(diver, garbage) {
         //garbage.body.enable = false;
-        if (garbage.active && diver.garbageCnt < 6) {
+        if (garbage.active && diver.garbageCnt < diver.maxGarbages) {
             garbage.destroy();
             diver.addGarbage();
+			this.redrawHUD();
         } else {
             return;
         }
@@ -127,6 +137,12 @@ class Scene2 extends Phaser.Scene {
         this.trashBoat.setActive(true);
         this.trashBoatTimer.paused = true;
     }
+	
+	redrawHUD() {
+		for (var i = 0; i < this.diver.garbageCnt; i++) {
+			this.garbageHUD.getChildren()[i].setAlpha(1);
+		}
+	}
 
 
     update() {
