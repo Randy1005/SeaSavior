@@ -139,8 +139,12 @@ class Scene2 extends Phaser.Scene {
     }
 	
 	redrawHUD() {
-		for (var i = 0; i < this.diver.garbageCnt; i++) {
+		var i = 0;
+		for (; i < this.diver.garbageCnt; i++) {
 			this.garbageHUD.getChildren()[i].setAlpha(1);
+		}
+		for (; i < this.garbageHUD.getChildren().length; i++) {
+			this.garbageHUD.getChildren()[i].setAlpha(0.5);
 		}
 	}
 
