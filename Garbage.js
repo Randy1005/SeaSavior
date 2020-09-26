@@ -42,9 +42,12 @@ class Garbage extends Phaser.GameObjects.Sprite {
             this.body.gravity.y = 0;
             this.body.velocity.y = 20;
         }
-		if (this.y > 520 && this.startDecaying) {
+		if (this.y > 522 && this.startDecaying) {
 			scene.time.delayedCall(2000, this.decay, [], this);
 			this.startDecaying = false;
+		}
+		if (this.y > 523) {
+			this.body.velocity.y = 0;
 		}
     }
 }

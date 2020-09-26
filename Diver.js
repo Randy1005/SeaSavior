@@ -42,7 +42,7 @@ class Diver extends Phaser.GameObjects.Sprite {
 
         if (this.cursorKeys.up.isDown && this.y > 308) {
             this.body.setVelocityY(-this.playerSpeed);
-        } else if (this.cursorKeys.down.isDown) {
+        } else if (this.cursorKeys.down.isDown && this.y < 505) {
             this.body.setVelocityY(this.playerSpeed);
         }
     }
