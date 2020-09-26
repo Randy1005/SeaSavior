@@ -7,6 +7,8 @@ class Scene2 extends Phaser.Scene {
     create() {
         var seaSurfaceDepth = 290;
 
+
+
         // background
         this.background = this.add.image(0, 0, 'sea0');
         this.background.setOrigin(0, 0);
@@ -18,6 +20,8 @@ class Scene2 extends Phaser.Scene {
         var plane2 = new Plane(this, 50, 40, 1.7, false);
         var plane3 = new Plane(this, 500, 70, 2, true);
         var plane4 = new Plane(this, 480, 100, 0.9, true);
+        this.garbageSpawnInterval = 5000;
+
 
         // garbages
         this.garbageList = this.physics.add.group();
@@ -40,8 +44,8 @@ class Scene2 extends Phaser.Scene {
 
 
         // a timer to create garbage
-        this.time.addEvent({
-            delay: 5000,
+        this.garbageSpawnTimer = this.time.addEvent({
+            delay: this.garbageSpawnInterval,
             callback: this.creatingGarbage,
             callbackScope: this,
             loop: true
@@ -98,6 +102,9 @@ class Scene2 extends Phaser.Scene {
             garbage.destroy();
             this.time.delayedCall(5000, this.respwanPlane, [plane.y, plane.speed, plane.goLeft], this);
             plane.destroy();
+
+            // increment shot down planes
+            this.diver.numShotDownPlanes++;
         }
     }
 
@@ -105,7 +112,7 @@ class Scene2 extends Phaser.Scene {
     // for diver to update garbage collection
     collectGarbage(diver, garbage) {
         //garbage.body.enable = false;
-        if (garbage.active && diver.garbageCnt < 6) {
+        if (garbage.active && diver.garbageCnt < diver.maxGarbages) {
             garbage.destroy();
             diver.addGarbage();
         } else {
@@ -129,6 +136,8 @@ class Scene2 extends Phaser.Scene {
     }
 
 
+
+
     update() {
         for (var i = 0; i < this.planes.getChildren().length; i++) {
             var oneplane = this.planes.getChildren()[i];
@@ -140,7 +149,7 @@ class Scene2 extends Phaser.Scene {
         this.trashBoat.update();
         if (config.health <= 0) {
             console.log("You Died");
-            functioNotExist();
+
         }
         if (config.health == 80) {
             this.background.setTexture("sea1");
@@ -154,5 +163,17 @@ class Scene2 extends Phaser.Scene {
             this.background.setTexture("sea3");
             config.health = 19;
         }
+
+
+        // increase difficulty as diver shoots down more planes
+        if (this.diver.numShotDownPlanes >= 10) {
+            // shrink garbage spawn interval
+            this.garbageSpawnInterval *= 0.7;
+            this.garbageSpawnTimer.delay = this.garbageSpawnInterval;
+
+            this.diver.numShotDownPlanes = 0;
+        }
+
+
     }
 }

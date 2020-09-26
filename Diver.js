@@ -20,8 +20,11 @@ class Diver extends Phaser.GameObjects.Sprite {
         this.spacebar = config.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // garbage collection counter
-        this.maxGarbages = 6;
+        this.maxGarbages = 10;
         this.garbageCnt = 0;
+
+        // num of shot down planes
+        this.numShotDownPlanes = 0;
 
         config.scene.add.existing(this);
     }
