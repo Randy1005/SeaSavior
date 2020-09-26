@@ -38,7 +38,7 @@ class TrashBoat extends Phaser.GameObjects.Sprite {
             if (this.x < -20) {
                 // resume event timer first before disabling update
                 this.scene.trashBoatTimer.paused = false;
-
+				this.scene.trashBoat.setTexture("trashboat0");
                 this.setActive(false);
             }
         } else {
