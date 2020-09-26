@@ -8,7 +8,6 @@ class Scene2 extends Phaser.Scene {
         var seaSurfaceDepth = 290;
 
 
-
         // background
         this.background = this.add.image(0, 0, 'sea0');
         this.background.setOrigin(0, 0);
@@ -59,7 +58,6 @@ class Scene2 extends Phaser.Scene {
             loop: true,
             paused: false
         });
-
 
 
         // add overlap listener for garbages and trashboat
@@ -155,6 +153,9 @@ class Scene2 extends Phaser.Scene {
         }
     }
 
+    gameOver() {
+        this.scene.pause();
+    }
 
     update() {
         for (var i = 0; i < this.planes.getChildren().length; i++) {
@@ -167,7 +168,7 @@ class Scene2 extends Phaser.Scene {
         this.trashBoat.update();
         if (config.health <= 0) {
             console.log("You Died");
-
+            this.gameOver();
         }
         if (config.health == 80) {
             this.background.setTexture("sea1");
