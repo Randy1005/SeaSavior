@@ -11,7 +11,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image('plane', 'assets/sprites/plane_resize.png');
         this.load.image('diver', 'assets/sprites/scuba.png');
         this.load.image('trash', 'assets/sprites/t_trash_bag_30_41.png');
-        this.load.image('trashboat', 'assets/sprites/ship_resize.png');
+        this.load.image('trashboat0', 'assets/sprites/trashLoader0.png');
+		this.load.image('trashboat1', 'assets/sprites/trashLoader1.png');
     }
 
     create() {
