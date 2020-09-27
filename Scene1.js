@@ -12,7 +12,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image('trash', 'assets/sprites/t_trash_bag_30_41.png');
         this.load.image('trashboat0', 'assets/sprites/trashLoader0.png');
         this.load.image('trashboat1', 'assets/sprites/trashLoader1.png');
-        this.load.image('endGameScreen', 'assets/sprites/game_over_screen_withlink.png')
+        this.load.image('endGameScreen', 'assets/sprites/game_over_screen_with_bg.png')
         this.load.spritesheet('diver_idle', 'assets/sprites/t_cha_idle_sheet.png', {
             frameWidth: 70,
             frameHeight: 70
