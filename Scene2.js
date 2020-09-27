@@ -30,7 +30,7 @@ class Scene2 extends Phaser.Scene {
             x: game.config.width / 2,
             y: 310,
             texture: 'diver_idle'
-        }, 200, [40, 60]);
+        }, 200, [70, 70]);
 
         // trashboat
         this.trashBoat = new TrashBoat({
