@@ -168,7 +168,7 @@ class Scene2 extends Phaser.Scene {
         this.trashBoat.update();
         if (config.health <= 0) {
             console.log("You Died");
-            this.gameOver();
+            this.scene.start('endGame');
         }
         if (config.health == 80) {
             this.background.setTexture("sea1");
