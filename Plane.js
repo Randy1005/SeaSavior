@@ -37,7 +37,7 @@ class Plane extends Phaser.GameObjects.Sprite {
                 x: this.x,
                 y: this.y + 20,
                 texture: 'trash'
-            }, [30, 41]);
+            }, [25, 34]);
             scene.garbageList.add(garbage);
         }
     }

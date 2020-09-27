@@ -9,7 +9,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image('sea2', 'assets/sprites/ocean_bg_v5_pollution_2.png');
         this.load.image('sea3', 'assets/sprites/ocean_bg_v5_pollution_3.png');
         this.load.image('plane', 'assets/sprites/plane_resize.png');
-        this.load.image('trash', 'assets/sprites/t_trash_bag_30_41.png');
+        this.load.image('trash', 'assets/sprites/t_trash_bag_v2_25_34.png');
         this.load.image('trashboat0', 'assets/sprites/trashLoader0.png');
         this.load.image('trashboat1', 'assets/sprites/trashLoader1.png');
         this.load.image('endGameScreen', 'assets/sprites/game_over_screen_with_bg.png')

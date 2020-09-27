@@ -94,7 +94,7 @@ class Diver extends Phaser.GameObjects.Sprite {
                 x: this.x,
                 y: this.y - 60,
                 texture: 'trash'
-            }, [30, 41]);
+            }, [25, 34]);
             garbage.isShootBack = true;;
             scene.garbageList.add(garbage);
 			scene.redrawHUD();
