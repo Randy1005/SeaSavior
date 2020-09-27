@@ -26,18 +26,42 @@ class Diver extends Phaser.GameObjects.Sprite {
         // num of shot down planes
         this.numShotDownPlanes = 0;
 
+        // add animation
+        var numOfAnime = 0;
+        this.play('diver_idle_anim');
+
         config.scene.add.existing(this);
+    }
+
+    playAnimation(animeNum) { // 0 for idle, 1 for left, 2 for right
+        if (this.numOfAnime != animeNum){
+            this.numOfAnime = animeNum;
+            if (animeNum == 0) {
+                this.texture = 'diver_idle';
+                this.play('diver_idle_anim');
+            }
+            if (animeNum == 1) {
+                this.texture = 'diver_left';
+                this.play('diver_left_anim');     
+            }
+            if (animeNum == 2) {
+                this.texture = 'diver_right';
+                this.play('diver_right_anim');
+            }
+        }
     }
 
     moveDiverManager() {
         this.body.setVelocity(0);
 
         if (this.cursorKeys.left.isDown) {
-            this.body.setVelocityX(-this.playerSpeed);
-            this.flipX = false;
+            this.body.setVelocityX(-this.playerSpeed); 
+            this.playAnimation(1);
         } else if (this.cursorKeys.right.isDown) {
             this.body.setVelocityX(this.playerSpeed);
-            this.flipX = true;
+            this.playAnimation(2);
+        } else {
+            this.playAnimation(0);
         }
 
         if (this.cursorKeys.up.isDown && this.y > 308) {
