@@ -69,9 +69,11 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.overlap(this.planes, this.garbageList, this.shootingPlane, null, this);
 
         // HUD
+        this.UIbar = this.add.image(0, 540, 'UIbar');
+        this.UIbar.setOrigin(0, 0);
         this.garbageHUD = this.add.group();
         for (var i = 0; i < this.diver.maxGarbages; i++) {
-            var g = this.add.image(i * 60 + 180, 570, 'trash');
+            var g = this.add.image(i * 60 + 210, 570, 'trash');
             g.setAlpha(0.5);
             this.garbageHUD.add(g);
         }
